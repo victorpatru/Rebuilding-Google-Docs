@@ -6,7 +6,7 @@ function NewDocument() {
     <section className="bg-[#F8F9FA] p-10">
       <div className="max-w-3xl mx-auto ">
         {/* Start new document Section */}
-        <div className="flex justify-between items-center py-6">
+        <div className="flex justify-between items-center pt-4 pb-6">
           <h2 className="text-gray-600 text-xl">Start a new document</h2>
           <IconButton
             color="gray"
