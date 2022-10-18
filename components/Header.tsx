@@ -57,7 +57,7 @@ function Header() {
         loading="lazy"
         src="/me.jpg"
         alt="user profile picture"
-        className="cursor-pointer h-12 w-12 rounded-full ml-2"
+        className="hidden md:inline-flex cursor-pointer h-12 w-12 rounded-full ml-2"
       />
     </header>
   );
