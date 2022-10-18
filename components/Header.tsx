@@ -7,7 +7,7 @@ import {
 
 function Header() {
   return (
-    <div className="sticky top-0 z-50 flex items-center px-5 py-4 shadow-md bg-white">
+    <header className="sticky top-0 z-50 flex items-center px-3 py-4 shadow-md bg-white">
       {/* Menu Div */}
       <IconButton
         color="gray"
@@ -20,7 +20,7 @@ function Header() {
       </IconButton>
 
       {/* Logo Div */}
-      <div className="flex items-center space-x-2">
+      <div className="items-center space-x-2 hidden sm:flex">
         <FontAwesomeIcon icon={faFileWord} className="w-8" color="#1e96f2" />
         <h1 className="hidden md:inline-flex ml-2 text-gray-700 text-2xl">
           Docs
@@ -50,16 +50,16 @@ function Header() {
         ripple={true}
         className="hidden md:inline-flex ml-5 md:ml-10 h-20 w-20 border-0 rounded-full"
       >
-        <i className="fa-solid fa-ellipsis fa-xl" aria-hidden></i>
+        <i className="fa-solid fa-grip fa-xl"></i>
       </IconButton>
 
       <img
         loading="lazy"
-        src="/me.jpeg"
+        src="/me.jpg"
         alt="user profile picture"
         className="cursor-pointer h-12 w-12 rounded-full ml-2"
       />
-    </div>
+    </header>
   );
 }
 export default Header;
