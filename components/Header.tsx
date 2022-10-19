@@ -6,9 +6,34 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import toast from "react-hot-toast";
 
 function Header() {
   const { data: session } = useSession();
+
+  const handleSignOut = () => {
+    toast.promise(
+      signOut(),
+      {
+        loading: "Loading",
+        success: "Successfully signed out!",
+        error: "Could not sign out!",
+      },
+      {
+        style: {
+          minWidth: "250px",
+        },
+        success: {
+          duration: 10000,
+          icon: "🔥",
+        },
+        error: {
+          duration: 5000,
+          icon: "🚫",
+        },
+      }
+    );
+  };
   return (
     <header className="sticky top-0 z-50 flex items-center px-3 py-4 shadow-md bg-white">
       {/* Menu Div */}
@@ -62,7 +87,7 @@ function Header() {
         src={session?.user?.image}
         className="hidden md:inline-flex cursor-pointer h-12 w-12 rounded-full ml-2"
         alt="user profile picture"
-        onClick={() => signOut()}
+        onClick={handleSignOut}
       />
     </header>
   );
