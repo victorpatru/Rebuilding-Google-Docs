@@ -14,6 +14,8 @@ import {
   Button,
 } from "@material-tailwind/react";
 import toast, { Toaster } from "react-hot-toast";
+import { db } from "../firebase.config";
+import { doc, addDoc, serverTimestamp, collection } from "firebase/firestore";
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
@@ -22,10 +24,44 @@ const Home: NextPage = () => {
 
   const createDocument = () => {
     if (!input) {
-      // toast.error("Please input a valid document name.");
       setShowModal(false);
       toast.error("Please input a valid document name.");
     }
+
+    const createNewDoc = async () => {
+      // Add the new Google document to Firestore
+      const docRef = collection(
+        db,
+        "userDocs",
+        session?.user?.email ?? "",
+        "docs"
+      );
+      await addDoc(docRef, {
+        filename: input,
+        timestamp: serverTimestamp(),
+      });
+    };
+
+    toast.promise(
+      createNewDoc(),
+      {
+        loading: "Creating document...",
+        success: <b>Document created!</b>,
+        error: <b>Could not save.</b>,
+      },
+      {
+        style: {
+          minWidth: "250px",
+        },
+        success: {
+          duration: 5000,
+          icon: "🔥",
+        },
+      }
+    );
+
+    setInput("");
+    setShowModal(false);
   };
 
   const cancelModal = () => {
