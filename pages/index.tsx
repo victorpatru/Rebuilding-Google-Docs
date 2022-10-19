@@ -13,6 +13,7 @@ import {
   DialogFooter,
   Button,
 } from "@material-tailwind/react";
+import toast, { Toaster } from "react-hot-toast";
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
@@ -20,7 +21,11 @@ const Home: NextPage = () => {
   const [input, setInput] = useState<string>("");
 
   const createDocument = () => {
-    console.log("Trying to create a new document");
+    if (!input) {
+      // toast.error("Please input a valid document name.");
+      setShowModal(false);
+      toast.error("Please input a valid document name.");
+    }
   };
 
   const cancelModal = () => {
@@ -55,7 +60,12 @@ const Home: NextPage = () => {
           Cancel
         </Button>
 
-        <Button color="blue" onClick={createDocument} ripple={true}>
+        <Button
+          color="blue"
+          onClick={createDocument}
+          ripple={true}
+          className="ml-3"
+        >
           Create
         </Button>
       </DialogFooter>
@@ -68,6 +78,9 @@ const Home: NextPage = () => {
         <title>Google Docs</title>
         <link rel="icon" href="/google_docs_favicon.webp" />
       </Head>
+      <div>
+        <Toaster />
+      </div>
 
       <Header />
       {modal}
