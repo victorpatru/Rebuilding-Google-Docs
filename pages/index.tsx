@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { GetServerSideProps } from "next";
 import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
 import Header from "../components/Header";
@@ -7,9 +8,10 @@ import NewDocument from "../components/NewDocument";
 import Login from "../components/Login";
 
 const Home: NextPage = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   if (!session) return <Login />;
+  // if (status === "unauthenticated") return <Login />;
 
   return (
     <div>
@@ -26,3 +28,13 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  return {
+    props: {
+      session,
+    },
+  };
+};
