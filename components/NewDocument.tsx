@@ -1,7 +1,12 @@
 import { IconButton } from "@material-tailwind/react";
 import Image from "next/image";
+import React from "react";
 
-function NewDocument() {
+type ModalState = {
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function NewDocument({ setShowModal }: ModalState) {
   return (
     <section className="bg-[#F8F9FA] p-10">
       <div className="max-w-3xl mx-auto ">
@@ -19,7 +24,10 @@ function NewDocument() {
           </IconButton>
         </div>
         <div>
-          <div className="relative h-52 w-40 border-2 cursor-pointer hover:border-blue-700">
+          <div
+            className="relative h-52 w-40 border-2 cursor-pointer hover:border-blue-700"
+            onClick={() => setShowModal(true)}
+          >
             <Image src="/new_docs_image.png" layout="fill" />
           </div>
 

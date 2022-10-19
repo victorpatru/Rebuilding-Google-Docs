@@ -5,6 +5,7 @@ import {
   faFileWord,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 function Header() {
   const { data: session } = useSession();
@@ -61,6 +62,7 @@ function Header() {
         src={session?.user?.image}
         className="hidden md:inline-flex cursor-pointer h-12 w-12 rounded-full ml-2"
         alt="user profile picture"
+        onClick={() => signOut()}
       />
     </header>
   );
