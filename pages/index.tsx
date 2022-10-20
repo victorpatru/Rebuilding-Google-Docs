@@ -40,27 +40,20 @@ const Home: NextPage = () => {
   // );
   const [snapshot, setSnapshot] = useState(null);
 
-  useEffect(() => {
-    const getDocuments = async () => {
-      const q = query(
-        collection(db, "userDocs", session.user?.email ?? "", "docs"),
-        orderBy("timestamp", "desc")
-      );
+  const getDocuments = async () => {
+    const q = query(
+      collection(db, "userDocs", session.user?.email ?? "", "docs"),
+      orderBy("timestamp", "desc")
+    );
 
-      const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(q);
-      // @ts-ignore
-      // querySnapshot.forEach((doc) =>
-      //   setSnapshot((prevState) => ({
-      //     ...prevState,
-      //     id: doc.id,
-      //     filename: doc.data().filename,
-      //     timestamp: doc.data().timestamp,
-      //   }))
-      // );
-      setSnapshot(querySnapshot);
-    };
+    const querySnapshot = await getDocs(q);
+
+    // @ts-ignore
+    setSnapshot(querySnapshot);
+  };
+  useEffect(() => {
     getDocuments();
-  }, [snapshot]);
+  }, []);
 
   const createDocument = () => {
     if (!input) {
@@ -102,6 +95,7 @@ const Home: NextPage = () => {
 
     setInput("");
     setShowModal(false);
+    getDocuments();
   };
 
   const cancelModal = () => {

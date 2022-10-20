@@ -8,7 +8,7 @@ interface SnapshotType {
 function MyDocuments({ snapshot }: SnapshotType) {
   return (
     <section className="bg-white p-10">
-      <div className="max-w-3xl mx-auto mt-8 text-gray-600">
+      <div className="max-w-3xl mx-auto mt-8 text-gray-600 mb-4">
         <div className="flex justify-between items-center">
           <h2 className="text-md font-medium">My Documents</h2>
 
