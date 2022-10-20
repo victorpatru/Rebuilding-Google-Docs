@@ -24,8 +24,7 @@ import {
   orderBy,
   getDocs,
 } from "firebase/firestore";
-import { useCollectionOnce } from "react-firebase-hooks/firestore";
-import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import { DocumentData, QuerySnapshot } from "firebase/firestore";
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
@@ -48,7 +47,7 @@ const Home: NextPage = () => {
         orderBy("timestamp", "desc")
       );
 
-      const querySnapshot = await getDocs(q);
+      const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(q);
       // @ts-ignore
       // querySnapshot.forEach((doc) =>
       //   setSnapshot((prevState) => ({
@@ -61,7 +60,7 @@ const Home: NextPage = () => {
       setSnapshot(querySnapshot);
     };
     getDocuments();
-  }, [session]);
+  }, [snapshot]);
 
   const createDocument = () => {
     if (!input) {
