@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { NextPage } from "next";
 import { GetServerSideProps } from "next";
 import { getSession, useSession } from "next-auth/react";
@@ -15,12 +15,53 @@ import {
 } from "@material-tailwind/react";
 import toast, { Toaster } from "react-hot-toast";
 import { db } from "../firebase.config";
-import { doc, addDoc, serverTimestamp, collection } from "firebase/firestore";
+import {
+  doc,
+  addDoc,
+  serverTimestamp,
+  collection,
+  query,
+  orderBy,
+  getDocs,
+} from "firebase/firestore";
+import { useCollectionOnce } from "react-firebase-hooks/firestore";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
+  if (!session) return <Login />;
   const [showModal, setShowModal] = useState<boolean>(false);
   const [input, setInput] = useState<string>("");
+
+  // const [snapshot] = useCollectionOnce(
+  //   query(
+  //     collection(db, "userDocs", session.user?.email, "docs"),
+  //     orderBy("timestamp", "desc")
+  //   )
+  // );
+  const [snapshot, setSnapshot] = useState(null);
+
+  useEffect(() => {
+    const getDocuments = async () => {
+      const q = query(
+        collection(db, "userDocs", session.user?.email ?? "", "docs"),
+        orderBy("timestamp", "desc")
+      );
+
+      const querySnapshot = await getDocs(q);
+      // @ts-ignore
+      // querySnapshot.forEach((doc) =>
+      //   setSnapshot((prevState) => ({
+      //     ...prevState,
+      //     id: doc.id,
+      //     filename: doc.data().filename,
+      //     timestamp: doc.data().timestamp,
+      //   }))
+      // );
+      setSnapshot(querySnapshot);
+    };
+    getDocuments();
+  }, [session]);
 
   const createDocument = () => {
     if (!input) {
@@ -68,8 +109,6 @@ const Home: NextPage = () => {
     setShowModal(false);
     setInput("");
   };
-
-  if (!session) return <Login />;
 
   const modal = (
     <Dialog
@@ -121,7 +160,7 @@ const Home: NextPage = () => {
       <Header />
       {modal}
       <NewDocument setShowModal={setShowModal} />
-      <MyDocuments />
+      <MyDocuments snapshot={snapshot} />
     </div>
   );
 };

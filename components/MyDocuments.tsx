@@ -1,4 +1,11 @@
-function MyDocuments() {
+import { DocumentData, QuerySnapshot } from "firebase/firestore";
+import DocumentRow from "./DocumentRow";
+
+interface SnapshotType {
+  snapshot: QuerySnapshot<DocumentData> | null;
+}
+
+function MyDocuments({ snapshot }: SnapshotType) {
   return (
     <section className="bg-white p-10">
       <div className="max-w-3xl mx-auto mt-8 text-gray-600">
@@ -11,6 +18,16 @@ function MyDocuments() {
           </div>
         </div>
       </div>
+
+      {snapshot &&
+        snapshot?.docs.map((doc) => (
+          <DocumentRow
+            key={doc.id}
+            id={doc.id}
+            filename={doc.data().filename}
+            date={doc.data().timestamp}
+          />
+        ))}
     </section>
   );
 }
