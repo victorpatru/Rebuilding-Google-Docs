@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 import { useState, useEffect } from "react";
 import { getDoc, doc } from "firebase/firestore";
 import { DocumentSnapshot, DocumentData } from "firebase/firestore";
+import TextEditor from "../../components/TextEditor";
+import { GetServerSideProps } from "next";
 
 function EditorPage() {
   const { data: session } = useSession();
@@ -94,7 +96,19 @@ function EditorPage() {
           />
         </div>
       </header>
+
+      <TextEditor />
     </section>
   );
 }
 export default EditorPage;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  return {
+    props: {
+      session,
+    },
+  };
+};
