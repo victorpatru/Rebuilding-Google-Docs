@@ -97,7 +97,7 @@ function EditorPage() {
         </div>
       </header>
 
-      <TextEditor />
+      <TextEditor session={session} />
     </section>
   );
 }
