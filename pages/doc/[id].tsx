@@ -81,7 +81,7 @@ function EditorPage() {
             </ul>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex items-center">
           <Button className="hidden md:inline-flex h-10">
             <i className="fa-solid fa-user-group"></i>
             <span className="ml-1 uppercase">Share</span>
@@ -90,7 +90,7 @@ function EditorPage() {
             loading="lazy"
             // @ts-ignore
             src={session?.user?.image}
-            className="cursor-pointer h-12 w-12 rounded-full ml-4"
+            className="hidden sm:block cursor-pointer h-12 w-12 rounded-full ml-4"
             alt="user profile picture"
             onClick={handleSignOut}
           />
