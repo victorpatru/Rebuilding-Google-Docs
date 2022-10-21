@@ -49,7 +49,7 @@ function Header() {
 
       {/* Logo Div */}
       <div className="items-center space-x-2 hidden sm:flex">
-        <FontAwesomeIcon icon={faFileWord} className="w-8" color="#1e96f2" />
+        <i className="fa-solid fa-file-word cursor-pointer text-5xl text-[#1e96f2]"></i>
         <h1 className="hidden md:inline-flex ml-2 text-gray-700 text-2xl">
           Docs
         </h1>
