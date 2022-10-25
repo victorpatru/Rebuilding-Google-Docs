@@ -39,6 +39,7 @@ const Home: NextPage = () => {
 
     const querySnapshot = await getDocs(q);
 
+    // @ts-ignore
     setSnapshot(querySnapshot);
   };
   useEffect(() => {

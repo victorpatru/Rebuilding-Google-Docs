@@ -33,10 +33,12 @@ function TextEditor() {
   );
 
   const [snapshot] = useDocumentOnce(
+    // @ts-ignore
     doc(db, "userDocs", session.user?.email ?? "", "docs", id)
   );
 
   useEffect(() => {
+    // @ts-ignore
     if (snapshot?.data().editorState) {
       setEditorState(
         EditorState.createWithContent(
@@ -50,6 +52,7 @@ function TextEditor() {
     // Manager Rich Editor Text
     setEditorState(editorState);
     // Put our Rich Editor Text into Firestore
+    // @ts-ignore
     const docRef = doc(db, "userDocs", session.user?.email ?? "", "docs", id);
 
     setDoc(

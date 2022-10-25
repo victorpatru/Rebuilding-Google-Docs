@@ -82,6 +82,7 @@ function Header() {
 
       <img
         loading="lazy"
+        // @ts-ignore
         src={session.user?.image}
         className="hidden md:inline-flex cursor-pointer h-12 w-12 rounded-full ml-2"
         alt="user profile picture"
