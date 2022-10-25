@@ -1,27 +1,37 @@
-# Next.js + Tailwind CSS Example
+# Rebuilding Google Docs
+Recreating Google Docs: one of the most popular application for collaborating and creating online documents
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+**Link to project:** https://docs-navy-two.vercel.app/
 
-## Deploy your own
+<img width="1238" alt="image" src="https://user-images.githubusercontent.com/102596893/197799188-68e0b43c-4185-4101-a13d-164c3463317a.png">
+<img width="1655" alt="CleanShot 2022-10-25 at 18 07 09@2x" src="https://user-images.githubusercontent.com/102596893/197811243-04de1527-de41-45a4-a4d2-1919a4839f55.png">
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+## How It's Made:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+**Tech used:** ReactJS, Typescript, NextJS, TailwindCSS, Material Tailwind UI, Next-Auth, Firebase (Firestore), Google Cloud Platform, DraftJS, React Hot Toastify, Various Hooks (Firebase, Next-Auth, React)
 
-## How to use
+## Lessons Learned:
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
+* Setting up a modern project using React, Next and Tailwind
+* Building a fully responsive application using Tailwind (mobile, tablet, monitor and 4k+)
+* Ensuring consistency with Google Docs UI thanks to the Material UI plug-in for TailwindCSS
+* Ensuring production-level code thanks to Typescript's type-checking ability
+* Using Firebase Firestore as the application backend (handling document creation)
+* Using DraftJS to enable the rich text editor for the individual document page
+* Using Next-Auth to handle authentification (SessionProviders plus useSession hooks)
+* Using server-side rendering to store the user session (with the help of the getSession hook provided by Next-Auth)
+* Using React Hot Toast to handle notifications on the page
+* Using Firebase React Hooks to fetch data from our Firestore database
+* Using NextJS's routing features
+* Working with environment variables
 
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
 
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+## Optimizations: 
+
+* Ability to update and delete documents information
+* Ability to export your document in various formats (eg. PDF) 
+* Ability to share over email and social media
+* Ability to concurrently collaborate on a document with another user 
