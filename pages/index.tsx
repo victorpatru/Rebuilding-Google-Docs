@@ -16,7 +16,6 @@ import {
 import toast, { Toaster } from "react-hot-toast";
 import { db } from "../firebase.config";
 import {
-  doc,
   addDoc,
   serverTimestamp,
   collection,
@@ -24,20 +23,12 @@ import {
   orderBy,
   getDocs,
 } from "firebase/firestore";
-import { DocumentData, QuerySnapshot } from "firebase/firestore";
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
   if (!session) return <Login />;
   const [showModal, setShowModal] = useState<boolean>(false);
   const [input, setInput] = useState<string>("");
-
-  // const [snapshot] = useCollectionOnce(
-  //   query(
-  //     collection(db, "userDocs", session.user?.email, "docs"),
-  //     orderBy("timestamp", "desc")
-  //   )
-  // );
   const [snapshot, setSnapshot] = useState(null);
 
   const getDocuments = async () => {
@@ -48,7 +39,6 @@ const Home: NextPage = () => {
 
     const querySnapshot = await getDocs(q);
 
-    // @ts-ignore
     setSnapshot(querySnapshot);
   };
   useEffect(() => {

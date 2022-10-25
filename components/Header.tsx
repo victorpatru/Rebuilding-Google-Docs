@@ -1,15 +1,14 @@
 import { IconButton } from "@material-tailwind/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMagnifyingGlass,
-  faFileWord,
-} from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import toast from "react-hot-toast";
+import Login from "./Login";
 
 function Header() {
   const { data: session } = useSession();
+  if (!session) return <Login />;
 
   const handleSignOut = () => {
     toast.promise(
@@ -83,8 +82,7 @@ function Header() {
 
       <img
         loading="lazy"
-        // @ts-ignore
-        src={session?.user?.image}
+        src={session.user?.image}
         className="hidden md:inline-flex cursor-pointer h-12 w-12 rounded-full ml-2"
         alt="user profile picture"
         onClick={handleSignOut}

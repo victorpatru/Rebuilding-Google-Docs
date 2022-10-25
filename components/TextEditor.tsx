@@ -7,28 +7,23 @@ import { ComponentType, useEffect, useState } from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorProps } from "react-draft-wysiwyg";
 import { EditorState } from "draft-js";
-import {
-  doc,
-  DocumentData,
-  DocumentSnapshot,
-  getDoc,
-  setDoc,
-} from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { db } from "../firebase.config";
 import { convertFromRaw, convertToRaw } from "draft-js";
 import { useDocumentOnce } from "react-firebase-hooks/firestore";
 import Login from "./Login";
+import { useSession } from "next-auth/react";
 
 const Editor: ComponentType<EditorProps> = dynamic(
-  // @ts-ignore
   () => import("react-draft-wysiwyg").then((module) => module.Editor),
   {
     ssr: false,
   }
 );
 
-function TextEditor({ session }: any) {
+function TextEditor() {
+  const { data: session } = useSession();
   if (!session) return <Login />;
   const router = useRouter();
   const { id } = router.query;
@@ -38,12 +33,10 @@ function TextEditor({ session }: any) {
   );
 
   const [snapshot] = useDocumentOnce(
-    // @ts-ignore
     doc(db, "userDocs", session.user?.email ?? "", "docs", id)
   );
 
   useEffect(() => {
-    // @ts-ignore
     if (snapshot?.data().editorState) {
       setEditorState(
         EditorState.createWithContent(
@@ -57,7 +50,6 @@ function TextEditor({ session }: any) {
     // Manager Rich Editor Text
     setEditorState(editorState);
     // Put our Rich Editor Text into Firestore
-    // @ts-ignore
     const docRef = doc(db, "userDocs", session.user?.email ?? "", "docs", id);
 
     setDoc(
