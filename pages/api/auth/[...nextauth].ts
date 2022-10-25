@@ -18,5 +18,6 @@ export const authOptions = {
     messagingSenderId: "289029707762",
     appId: "1:289029707762:web:d52393a6327bac46547d6b",
   }),
+  secret: process.env.SECRET,
 };
 export default NextAuth(authOptions);
