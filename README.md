@@ -24,6 +24,7 @@ Recreating Google Docs: one of the most popular application for collaborating an
 * Using React Hot Toast to handle notifications on the page
 * Using Firebase React Hooks to fetch data from our Firestore database
 * Using NextJS's routing features
+* Extracting user information from the Google Auth login to display the user profile picture in our application
 * Working with environment variables
 
 
